@@ -1,0 +1,20 @@
+runtime: nodejs
+env: flex
+
+handlers:
+  # Serve all files in the .next folder as static files
+  - url: /(.*\.(?:ico|jpg|png|gif|svg))
+    static_files: .next/static/\1
+    upload: .next/static/.*\.(?:ico|jpg|png|gif|svg)
+  - url: /(.*)
+    static_files: .next/static/\1
+    upload: .next/static/.*
+  # Serve all other requests as Next.js requests
+  - url: /.*
+    secure: always
+    redirect_http_response_code: 301
+    script: auto
+
+# Add environment variables
+env_variables:
+  NEXT_PUBLIC_EXAMPLE_VAR: "example value"
